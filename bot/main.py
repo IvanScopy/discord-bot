@@ -108,7 +108,7 @@ class DiscordBot(commands.Bot):
         """Global error handler"""
         if isinstance(error, commands.CommandNotFound):
             return  # Ignore command not found errors
-        
+
         if isinstance(error, commands.MissingRequiredArgument):
             embed = discord.Embed(
                 title=f"{Emojis.ERROR} Thiếu tham số",
@@ -117,7 +117,7 @@ class DiscordBot(commands.Bot):
             )
             await ctx.send(embed=embed)
             return
-        
+
         if isinstance(error, commands.MissingPermissions):
             embed = discord.Embed(
                 title=f"{Emojis.ERROR} Không đủ quyền",
@@ -126,15 +126,61 @@ class DiscordBot(commands.Bot):
             )
             await ctx.send(embed=embed)
             return
-        
+
         # Log unexpected errors
         self.logger.error(f"Unexpected error in {ctx.command}: {error}", exc_info=True)
-        
+
         embed = discord.Embed(
             title=f"{Emojis.ERROR} Có lỗi xảy ra",
             description="Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau.",
             color=Colors.ERROR
         )
+        await ctx.send(embed=embed)
+
+    # Basic Commands
+    @commands.command(name="hello", help="Trả lời câu chào")
+    async def hello_command(self, ctx: commands.Context):
+        embed = discord.Embed(
+            title="👋 Xin chào!",
+            description=f"Chào {ctx.author.mention}!",
+            color=Colors.SUCCESS
+        )
+        embed.set_footer(text=f"Yêu cầu bởi {ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else None)
+        await ctx.send(embed=embed)
+
+    @commands.command(name="ping", help="Kiểm tra độ trễ bot")
+    async def ping_command(self, ctx: commands.Context):
+        latency = round(self.latency * 1000)
+        embed = discord.Embed(
+            title="🏓 Pong!",
+            description=f"Độ trễ: {latency}ms",
+            color=Colors.SUCCESS
+        )
+        embed.set_footer(text=f"Yêu cầu bởi {ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else None)
+        await ctx.send(embed=embed)
+
+    @commands.command(name="help", help="Hiển thị danh sách lệnh")
+    async def help_command(self, ctx):
+        embed = discord.Embed(
+            title="📚 Danh sách lệnh",
+            description="Dưới đây là danh sách các lệnh có sẵn:",
+            color=Colors.INFO
+        )
+
+        # Thêm các lệnh prefix
+        prefix_commands = "**Các lệnh prefix:**\n"
+        for command in self.commands:
+            prefix_commands += f"`{Config.COMMAND_PREFIX}{command.name}` - {command.help}\n"
+        embed.add_field(name="Prefix Commands", value=prefix_commands[:1024], inline=False)
+
+        # Thêm các lệnh slash
+        slash_commands = "**Các lệnh Slash:**\n"
+        for command in self.tree.get_commands():
+            slash_commands += f"`/{command.name}` - {command.description}\n"
+        if slash_commands != "**Các lệnh Slash:**\n":
+            embed.add_field(name="Slash Commands", value=slash_commands[:1024], inline=False)
+
+        embed.set_footer(text=f"Yêu cầu bởi {ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else None)
         await ctx.send(embed=embed)
 
 async def main():
