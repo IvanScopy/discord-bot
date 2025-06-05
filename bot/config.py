@@ -95,6 +95,8 @@ def get_bot_intents():
 # Cog configuration
 COGS = [
     'bot.cogs.music',
+    'bot.cogs.weather',
+    'bot.cogs.utilities',
     'bot.cogs.events',
     'bot.cogs.reminders',
     'bot.cogs.media_sharing',

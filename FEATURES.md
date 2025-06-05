@@ -1,6 +1,5 @@
 # 🎯 Tính Năng Discord Bot - Đầy Đủ
 
-## ✅ **Tất Cả Tính Năng Từ Chatbot2 Đã Được Copy**
 
 ### 🎵 **Music System (music.py)**
 - ✅ Phát nhạc từ YouTube

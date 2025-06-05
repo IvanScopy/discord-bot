@@ -19,7 +19,7 @@ requests>=2.31.0
 # Environment variables
 python-dotenv>=1.0.0
 
-# AI/ML APIs
+# AI/ML APIs (optional)
 openai>=1.0.0
 
 # Image processing and APIs
