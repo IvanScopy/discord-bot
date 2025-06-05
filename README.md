@@ -56,7 +56,7 @@ Một Discord bot đa chức năng được viết bằng Python với đầy đ
 
 ### **1. Clone Repository**
 ```bash
-git clone https://github.com/yourusername/discord-bot.git
+git clone https://github.com/IvanScopy/discord-bot.git
 cd discord-bot
 ```
 
