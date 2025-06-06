@@ -3,7 +3,7 @@ import logging.handlers
 import os
 from datetime import datetime
 from typing import Optional
-from database import db_manager
+from utils.database import db_manager
 
 class DatabaseLogHandler(logging.Handler):
     """Custom log handler that writes logs to the database"""
@@ -240,10 +240,15 @@ class BotLogger:
                 extra={'user_id': user_id, 'guild_id': guild_id, 'bot_module': 'media'}
             )
 
-# Initialize the logging system
-bot_logger = BotLogger()
+# Global bot logger instance (initialized by setup_logging)
+bot_logger = None
 
 # Convenience functions for easy access
+def setup_logging():
+    """Setup logging system - convenience function"""
+    global bot_logger
+    bot_logger = BotLogger()
+
 def get_logger(name: str) -> logging.Logger:
     """Get a logger for a specific module"""
     return BotLogger.get_logger(name)

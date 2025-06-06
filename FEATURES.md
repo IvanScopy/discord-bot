@@ -114,6 +114,47 @@
 !video thumbnail <url> - Lấy thumbnail
 ```
 
+### 🌤️ **Weather System (weather.py)**
+- ✅ Thời tiết hiện tại
+- ✅ Dự báo 3 ngày
+- ✅ Dự báo theo giờ
+- ✅ Thông tin chi tiết (nhiệt độ, độ ẩm, gió, UV)
+- ✅ Icon thời tiết
+- ✅ WeatherAPI integration
+
+**Lệnh:**
+```
+/weather <city>     - Thời tiết hiện tại
+/forecast <city>    - Dự báo 3 ngày
+/hourly <city>      - Dự báo theo giờ
+!weather <city>     - Thời tiết (prefix)
+```
+
+### 🛠️ **Utilities System (utilities.py)**
+- ✅ ChatGPT integration
+- ✅ Random images từ Pexels
+- ✅ Image search by topic
+- ✅ Birthday wishes với ảnh
+- ✅ Dice rolling
+- ✅ Poll creation
+- ✅ Server invite links
+- ✅ Channel creation
+- ✅ Simple reminders
+
+**Lệnh:**
+```
+/chatgpt <prompt>   - Chat với AI
+/ask <question>     - Hỏi ChatGPT
+!roll               - Lăn xúc xắc
+!poll <question> <options> - Tạo poll
+!random_image       - Ảnh ngẫu nhiên
+!search_image <topic> - Tìm ảnh theo chủ đề
+!birthday <name>    - Chúc sinh nhật
+!invite             - Tạo link mời
+!create_channel <name> - Tạo kênh mới
+!remind_simple <minutes> <task> - Nhắc nhở đơn giản
+```
+
 ### 🤖 **Core Commands (main.py)**
 - ✅ Hello/Ping commands
 - ✅ Help system
@@ -179,16 +220,18 @@
 ## 📊 **Statistics**
 
 ### 📈 **Code Stats**
-- **Total Files**: 15+ files
-- **Total Lines**: 3000+ lines of code
-- **Cogs**: 7 feature cogs
-- **Commands**: 50+ commands
-- **Events**: 10+ event handlers
+- **Total Files**: 20+ files
+- **Total Lines**: 4000+ lines of code
+- **Cogs**: 9 feature cogs
+- **Commands**: 70+ commands
+- **Events**: 15+ event handlers
 - **Database Tables**: 6 tables
 
 ### 🎯 **Features Count**
 - **Music Commands**: 9 commands
-- **Event Commands**: 6 commands  
+- **Weather Commands**: 4 commands (3 slash + 1 prefix)
+- **Utilities Commands**: 10 commands (2 slash + 8 prefix)
+- **Event Commands**: 6 commands
 - **Reminder Commands**: 4 commands
 - **Media Commands**: 4 commands
 - **User Commands**: 4 commands
@@ -200,6 +243,8 @@
 
 ### ✅ **Checklist**
 - [x] ✅ Tất cả cogs từ Chatbot2 đã copy
+- [x] ✅ Weather system đầy đủ (3 slash commands)
+- [x] ✅ Utilities system với ChatGPT và images
 - [x] ✅ Imports đã được sửa đúng
 - [x] ✅ Config đã cập nhật
 - [x] ✅ Main.py đã có basic commands
@@ -212,7 +257,9 @@
 ### 🎉 **Kết Quả**
 Bot Discord hoàn chỉnh với:
 - 🎵 **Music system ổn định**
-- 🎉 **Event management**
+- �️ **Weather system đầy đủ**
+- 🛠️ **Utilities với ChatGPT & Images**
+- �🎉 **Event management**
 - ⏰ **Reminder system**
 - 📎 **Media sharing**
 - 👤 **User information**
@@ -220,4 +267,4 @@ Bot Discord hoàn chỉnh với:
 - 🎬 **Video processing**
 - 🤖 **Core utilities**
 
-**Sẵn sàng upload lên GitHub và deploy! 🚀**
+**100% tính năng từ Chatbot2 + Cải thiện! Sẵn sàng deploy! 🚀**
