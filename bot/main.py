@@ -7,6 +7,8 @@ import asyncio
 import sys
 import os
 from pathlib import Path
+import subprocess
+from aiohttp import web
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent
@@ -76,6 +78,38 @@ class DiscordBot(commands.Bot):
         for feature, enabled in features.items():
             status = "✅" if enabled else "❌"
             self.logger.info(f"  {feature}: {status}")
+            
+        # Kiểm tra FFmpeg
+        try:
+            result = subprocess.run(['ffmpeg', '-version'], capture_output=True, text=True)
+            self.logger.info(f"FFmpeg check: SUCCESS")
+            self.logger.info(f"FFmpeg version: {result.stdout.split('\\n')[0]}")
+        except Exception as e:
+            self.logger.error(f"FFmpeg check: FAILED")
+            self.logger.error(f"Error: {e}")
+            
+        # Khởi động web server cho health check
+        await self.setup_webserver()
+        
+    async def setup_webserver(self):
+        """Setup web server for health check"""
+        try:
+            app = web.Application()
+            
+            async def health_check(request):
+                return web.Response(text=f"{Config.BOT_NAME} is healthy!")
+            
+            app.router.add_get('/health', health_check)
+            app.router.add_get('/', health_check)
+            
+            runner = web.AppRunner(app)
+            await runner.setup()
+            port = int(os.environ.get('PORT', 8080))
+            site = web.TCPSite(runner, '0.0.0.0', port)
+            await site.start()
+            self.logger.info(f"Health check web server running on port {port}")
+        except Exception as e:
+            self.logger.error(f"Failed to start web server: {e}")
     
     async def on_guild_join(self, guild):
         """Called when bot joins a guild"""
@@ -218,3 +252,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Failed to start bot: {e}")
         sys.exit(1)
+
