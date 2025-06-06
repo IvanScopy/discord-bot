@@ -26,6 +26,7 @@ RUN mkdir -p data logs
 # Set environment variables
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
+ENV PORT=8080
 
 # Create non-root user for security
 RUN useradd -m -u 1000 botuser && chown -R botuser:botuser /app
@@ -40,3 +41,4 @@ EXPOSE 8080
 
 # Run the bot
 CMD ["python", "bot/main.py"]
+
